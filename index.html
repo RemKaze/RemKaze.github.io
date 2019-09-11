@@ -76,7 +76,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/11/test-my-site/">test_my_site</a>
+      <a class="article-title" href="/2019/09/11/test-my-site/">Django</a>
     </h1>
   
 
@@ -84,11 +84,89 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h1 id="第一个Django项目"><a href="#第一个Django项目" class="headerlink" title="第一个Django项目"></a>第一个Django项目</h1><h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><h3 id="虚拟环境"><a href="#虚拟环境" class="headerlink" title="虚拟环境"></a>虚拟环境</h3><h4 id="为什么要有虚拟环境"><a href="#为什么要有虚拟环境" class="headerlink" title="为什么要有虚拟环境"></a>为什么要有虚拟环境</h4><p>虽然我们可以通过<code>pip instal</code>来解决大部分的安装问题，但这样安装会将那个包安装到你的系统级的 Python 环境中，这样一是会导致环境看起来比较乱，二是无法同时维护两个冲突的包，一个简单地例子：<br><br>我之前使用 Django 0.9完成了一个网站，但现在在开发 Django 1.10.x 的网站。<br><br> Django 1.10 不再兼容 Django 0.9 的一些语法了。这时候就会碰到一个问题，我如何在我的电脑中同时拥有 Django 1.10 和 Django 0.9 两套环境呢？</p>
+<h4 id="虚拟环境原理介绍："><a href="#虚拟环境原理介绍：" class="headerlink" title="虚拟环境原理介绍："></a>虚拟环境原理介绍：</h4><p>虚拟环境相当于一个抽屉，在这个抽屉中安装的任何软件包都不会影响到其他抽屉。并且在项目<br>中，我可以指定这个项目的虚拟环境来配合我的项目。比如我们现在有一个项目是基于 Django<br>1.10.x 版本，又有一个项目是基于 Django 0.9.x 的版本，那么这时候就可以创建两个虚拟环境，<br>在这两个虚拟环境中分别安装 Django 1.10.x 和 Django 0.9.x 来适配我们的项目。</p>
+<h4 id="安装虚拟环境"><a href="#安装虚拟环境" class="headerlink" title="安装虚拟环境"></a>安装虚拟环境</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip install virtualenv</span><br><span class="line">pip3 install virtualenv</span><br></pre></td></tr></table></figure>
+
+<h3 id="Django相关的包"><a href="#Django相关的包" class="headerlink" title="Django相关的包"></a>Django相关的包</h3><p>最基础只需要两个</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">必装</span><br><span class="line">pip install Django</span><br><span class="line">下者二选一</span><br><span class="line">pip install mysqlclient</span><br><span class="line">pip install pymysql</span><br></pre></td></tr></table></figure>
+
+<h2 id="创建Django"><a href="#创建Django" class="headerlink" title="创建Django"></a>创建Django</h2><h3 id="使用命令行的方式"><a href="#使用命令行的方式" class="headerlink" title="使用命令行的方式"></a>使用命令行的方式</h3><ol>
+<li><p>创建项目：打开终端，使用命令： django-admin startproject [项目名称] 即可创建。比<br>如： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin startproject first_project</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建应用（app）：一个项目类似于是一个架子，但是真正起作用的还是 app 。在终端进入到<br>项目所在的路径，然后执行以下命令创建一个app（click）。</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py startapp click</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li><p>当你看到这个页面，说明Django已经配置成功了<br><img src="http://wx4.sinaimg.cn/mw690/0072UwX1ly1g6umo5vvrxj31hk0t4776.jpg" alt="image"></p>
+</li>
+<li><p>Django大致结构如下图</p>
+</li>
+</ol>
+<p><img src="http://wx3.sinaimg.cn/mw690/0072UwX1ly1g6umjlgjgyj308v09z3yi.jpg" alt="image"></p>
+<blockquote>
+<p>project和app的关系：<br><br>app 是 django 项目的组成部分。一个 app 代表项目中的一个模块，所有 URL 请求的响应都是由 app 来处理。</p>
+</blockquote>
+<p>此处为APP部分功能演示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">def login(request):</span><br><span class="line">    if request.method == &apos;GET&apos;:</span><br><span class="line">        return render(request, &apos;login.html&apos;)</span><br><span class="line">    else:</span><br><span class="line">        username = request.POST[&apos;username&apos;]</span><br><span class="line">        password = request.POST[&apos;password&apos;]</span><br><span class="line">        cursor = get_corsor()</span><br><span class="line">        if cursor.execute(&quot;select username from user where username = &apos;%s&apos; and password = &apos;%s&apos; &quot;%(username,password)):</span><br><span class="line">            res = redirect(&apos;index&apos;)</span><br><span class="line">            res.set_cookie(&apos;username&apos;, username)</span><br><span class="line">            return res</span><br><span class="line">        else:</span><br><span class="line">            return HttpResponse(&quot;账号或密码错误&quot;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="用pycharm的方式"><a href="#用pycharm的方式" class="headerlink" title="用pycharm的方式"></a>用pycharm的方式</h3><p>使用Pycharm新建一个项目，截图如下<br><img src="http://wx4.sinaimg.cn/mw690/0072UwX1ly1g6uhz11yitj30m10dv0tk.jpg" alt="image"></p>
+<h2 id="运行Django项目"><a href="#运行Django项目" class="headerlink" title="运行Django项目"></a>运行Django项目</h2><ol>
+<li>通过命令行的方式： <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py runserver</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>这样可以在本地访问你的网站了<br><br>在浏览器中通过 <a href="http://127.0.0.1:8000/" target="_blank" rel="noopener">http://127.0.0.1:8000/</a> 来访问你的网站。如果想要修改端口号，那么在运行的时候可以指定端口号， </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py runserver 9000</span><br></pre></td></tr></table></figure>
+
+<p>这样就可以通过9000端口来访问了。<br><br>另外，这样运行的项目只能在本机上能访问，如<br>果想要在其他电脑上也能访问本网站，那么需要指定 ip 地址为 0.0.0.0 。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py runserver 0.0.0.0:8000 。</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>通过 pycharm 运行。直接点击右上角的绿色箭头按钮即可运行。</li>
+</ol>
+<h2 id="数据库连接"><a href="#数据库连接" class="headerlink" title="数据库连接"></a>数据库连接</h2><p>要想在项目中使用数据库，需要在<code>settings.py</code>这个文件中尽行配置<br><br>具体位置如下图</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">DATABASES = &#123;</span><br><span class="line">    &apos;default&apos;: &#123;</span><br><span class="line">        &apos;ENGINE&apos;: &apos;django.db.backends.mysql&apos;,</span><br><span class="line">        &apos;NAME&apos;: &apos;book_manager&apos;,</span><br><span class="line">        &apos;USER&apos;: &apos;root&apos;,</span><br><span class="line">        &apos;PASSWORD&apos;: &apos;toor&apos;,</span><br><span class="line">        &apos;HOST&apos;: &apos;127.0.0.1&apos;,</span><br><span class="line">        &apos;PORT&apos;: &apos;3306&apos;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以上参数均以自己的电脑为准</p>
+<h2 id="项目结构简介："><a href="#项目结构简介：" class="headerlink" title="项目结构简介："></a>项目结构简介：</h2><ol>
+<li>manage.py ：以后和项目交互基本上都是基于这个文件。一般都是在终端输入 python<br>manage.py [子命令] 。可以输入 python manage.py help 看下能做什么事情。除非你知道你自<br>己在做什么，一般情况下不应该编辑这个文件。</li>
+<li>settings.py ：本项目的设置项，以后所有和项目相关的配置都是放在这个里面。</li>
+<li>urls.py ：这个文件是用来配置URL路由的。比如访问 <a href="http://127.0.0.1/news/" target="_blank" rel="noopener">http://127.0.0.1/news/</a> 是访问新闻<br>列表页，这些东西就需要在这个文件中完成。</li>
+<li>wsgi.py ：项目与 WSGI 协议兼容的 web 服务器入口，部署的时候需要用到的，一般情况下<br>也是不需要修改的。</li>
+</ol>
+<blockquote>
+<p>当生成一个新的项目时，会自动生成一个admin页面</p>
+</blockquote>
+<h2 id="Django的安全防护措施"><a href="#Django的安全防护措施" class="headerlink" title="Django的安全防护措施"></a>Django的安全防护措施</h2><p><a href="https://developer.mozilla.org/zh-CN/docs/learn/Server-side/Django/web_application_security#概述" target="_blank" rel="noopener">详情看这里</a></p>
+<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>web安全 主題提供一个概述，说明了网站安全对于服务器端设计的意义，以及以及一些需要应对的常见威胁。本文中包含一个关键的概念：如果网站信任任何来自浏览器的数据，几乎所有的攻击方法都会成功。</p>
+<p>对Django用户来说，好消息是Django框架已经处理了大量的常见威胁。请阅读Django官方文档中的”Security in Django”部分来了解Django的安全细节，以及如何确保基于Django的网站的安全。</p>
+<p>官方文档展示了一些常见的攻击手段和与之对应的保护措施</p>
+<ul>
+<li>跨站脚本 (XSS)</li>
+<li>防护跨站请求伪造 (CSRF)</li>
+<li>SQL注入防护</li>
+<li>点击劫持防护</li>
+<li>强制SSL/HTTPS</li>
+<li>Host头校验</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>Django具备有效的防护措施，以对抗一些常見的威胁，包括 XSS 和 CSRF 攻击，这绝大部分都是Django的自带模板DTL的功劳。<br></p>
+<p>DTL模板是一种带有特殊语法的HTML文件，这个HTML文件可以被Django编译，可以传递参数进去，实现数据动态化。在编译完成后，生成一个普通的HTML文件，然后发送给客户端。</p>
+<p>DTL的转义功能可以解决大部分来自输入的攻击</p>
+<hr>
+<p><img src="https://mdn.mozillademos.org/files/14305/author_create_form_alert_xss.png" alt="image"></p>
+<hr>
+<p><img src="https://mdn.mozillademos.org/files/14307/author_detail_alert_xss.png" alt="image"></p>
+<hr>
+<p>以下是一处简单地DTL模板演示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&#123;% load static %&#125;</span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;title&gt;图书管理系统&lt;/title&gt;</span><br><span class="line">    &lt;link rel=&quot;stylesheet&quot; href=&quot;&#123;% static &apos;front/base.css&apos; %&#125;&quot;&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;nav&gt;</span><br><span class="line">    &lt;ul class=&quot;nav&quot;&gt;</span><br><span class="line">        &lt;li&gt;&lt;a href=&quot;/&quot;&gt;首页&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">        &lt;li&gt;&lt;a href=&quot;&#123;% url &apos;add_book&apos; %&#125;&quot;&gt;添加图书&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">        &lt;li&gt;&lt;a href=&quot;&#123;% url &apos;login&apos; %&#125;&quot;&gt;登录&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">        &lt;li&gt;&lt;a href=&quot;&#123;% url &apos;register&apos; %&#125;&quot;&gt;注册&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">        &lt;li class = &quot;picture&quot;&gt;图片&lt;/li&gt;</span><br><span class="line">    &lt;/ul&gt;</span><br><span class="line">&lt;/nav&gt;</span><br><span class="line">&#123;% block content %&#125;</span><br><span class="line"># 模板继承</span><br><span class="line">&#123;% endblock %&#125;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://remkaze.github.io/2019/09/11/test-my-site/" data-id="ck0eyu65a00006su4cqmmgdob" class="article-share-link">Share</a>
+      <a data-url="https://remkaze.github.io/2019/09/11/test-my-site/" data-id="ck0ez62e10000msu4yknh0al3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -129,7 +207,7 @@
       <ul>
         
           <li>
-            <a href="/2019/09/11/test-my-site/">test_my_site</a>
+            <a href="/2019/09/11/test-my-site/">Django</a>
           </li>
         
       </ul>
