@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="前言原文(需翻墙)  FEATURE ENGINEERINGHJ van Veen - Data Science - Nubank Brasil  特征工程 “More data beats clever algorithms, but betterdata beats more data.”&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp">
+<meta name="description" content="前言原文(需翻墙)  FEATURE ENGINEERINGHJ van Veen - Data Science - Nubank Brasil  特征工程 “More data beats clever algorithms, but better data beats more data.”&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;ems">
 <meta name="keywords" content="特征工程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="特征工程 编码篇">
-<meta property="og:url" content="https://remkaze.github.io/2019/09/16/FeatureEngineering_encoding/index.html">
+<meta property="og:url" content="https://remkaze.github.io/2019/09/13/FeatureEngineering_encoding/index.html">
 <meta property="og:site_name" content="See you space cowboy">
-<meta property="og:description" content="前言原文(需翻墙)  FEATURE ENGINEERINGHJ van Veen - Data Science - Nubank Brasil  特征工程 “More data beats clever algorithms, but betterdata beats more data.”&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp">
+<meta property="og:description" content="前言原文(需翻墙)  FEATURE ENGINEERINGHJ van Veen - Data Science - Nubank Brasil  特征工程 “More data beats clever algorithms, but better data beats more data.”&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;ems">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-13T07:35:53.304Z">
+<meta property="og:updated_time" content="2019-09-13T07:41:44.124Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="特征工程 编码篇">
-<meta name="twitter:description" content="前言原文(需翻墙)  FEATURE ENGINEERINGHJ van Veen - Data Science - Nubank Brasil  特征工程 “More data beats clever algorithms, but betterdata beats more data.”&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp">
+<meta name="twitter:description" content="前言原文(需翻墙)  FEATURE ENGINEERINGHJ van Veen - Data Science - Nubank Brasil  特征工程 “More data beats clever algorithms, but better data beats more data.”&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;emsp;&amp;ems">
 
 
 
@@ -120,7 +120,7 @@
 
 
 
-  <link rel="canonical" href="https://remkaze.github.io/2019/09/16/FeatureEngineering_encoding/">
+  <link rel="canonical" href="https://remkaze.github.io/2019/09/13/FeatureEngineering_encoding/">
 
 
 
@@ -263,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://remkaze.github.io/2019/09/16/FeatureEngineering_encoding/">
+    <link itemprop="mainEntityOfPage" href="https://remkaze.github.io/2019/09/13/FeatureEngineering_encoding/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Rem.Kaze">
@@ -292,8 +292,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-16T15:32:22+08:00">
-                2019-09-16
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-13T15:32:22+08:00">
+                2019-09-13
               </time>
             
 
@@ -354,27 +354,31 @@
       
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p><a href="https://www.slideshare.net/HJvanVeen/feature-engineering-72376750" target="_blank" rel="noopener">原文(需翻墙)</a></p>
 <blockquote>
-<p>FEATURE ENGINEERING<br><br>HJ van Veen - Data Science - Nubank Brasil</p>
+<p>FEATURE ENGINEERING<br>HJ van Veen - Data Science - Nubank Brasil</p>
 </blockquote>
 <h2 id="特征工程"><a href="#特征工程" class="headerlink" title="特征工程"></a>特征工程</h2><blockquote>
-<p>“More data beats clever algorithms, but better<br>data beats more data.”<br><br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;–Peter Norvig  </p>
+<p>“More data beats clever algorithms, but better data beats more data.”<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;–Peter Norvig  </p>
 </blockquote>
 <ul>
 <li>数据科学最具创意的方面</li>
 <li>你应该像对待其它创造性工作，像是写喜剧一样对待它</li>
 <li>头脑风暴</li>
 <li>创造特征和公示</li>
-<li>反复确认起是什么起了作用<h2 id="分类型特征"><a href="#分类型特征" class="headerlink" title="分类型特征"></a>分类型特征</h2></li>
+<li>反复确认起是什么起了作用</li>
+</ul>
+<h2 id="分类型特征"><a href="#分类型特征" class="headerlink" title="分类型特征"></a>分类型特征</h2><ul>
 <li>总是需要处理</li>
 <li>高基数(维度)导致特征稀疏</li>
-<li>很难处理缺失值<h2 id="独热编码-Onehot-encoding"><a href="#独热编码-Onehot-encoding" class="headerlink" title="独热编码(Onehot encoding)"></a>独热编码(Onehot encoding)</h2></li>
+<li>很难处理缺失值</li>
+</ul>
+<h2 id="独热编码-Onehot-encoding"><a href="#独热编码-Onehot-encoding" class="headerlink" title="独热编码(Onehot encoding)"></a>独热编码(Onehot encoding)</h2><ul>
 <li>One-of-K encoding on an array of length K.</li>
 <li>基本用法:与大部分线性算法一起使用</li>
 <li>离散后避免共线问题</li>
-<li>稀疏格式对内存友好</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Sample: [&quot;BR&quot;]</span><br><span class="line">country country=NL country=BR country=US</span><br><span class="line">------- ---------- ---------- ----------</span><br><span class="line">NL =&gt; [ 0, 1, 0]</span><br><span class="line">BR</span><br><span class="line">US</span><br><span class="line">Encoded dense: [0, 1, 0]</span><br><span class="line">Encoded sparse: 2:1</span><br></pre></td></tr></table></figure>
+<li>稀疏格式对内存友好<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Sample: [&quot;BR&quot;]</span><br><span class="line">country country=NL country=BR country=US</span><br><span class="line">------- ---------- ---------- ----------</span><br><span class="line">NL =&gt; [ 0, 1, 0]</span><br><span class="line">BR</span><br><span class="line">US</span><br><span class="line">Encoded dense: [0, 1, 0]</span><br><span class="line">Encoded sparse: 2:1</span><br></pre></td></tr></table></figure>
 
+</li>
+</ul>
 <h2 id="哈希编码-Hash-encoding"><a href="#哈希编码-Hash-encoding" class="headerlink" title="哈希编码(Hash encoding)"></a>哈希编码(Hash encoding)</h2><ul>
 <li>避免数据过于稀疏</li>
 <li>可能产生碰撞</li>
