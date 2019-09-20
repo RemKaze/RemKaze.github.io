@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="特征工程,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="“Coming up with features is difficult, time.consuming, requires expert knowledge. “Appliedmachine learning” is basically featureengineering.”–Andrew Ng  数值特征(Numerical Features) 可以更容易的输入到算法中 可由floats">
+<meta name="keywords" content="特征工程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="特征工程-2">
+<meta property="og:url" content="https://remkaze.github.io/2019/09/20/特征工程-2/index.html">
+<meta property="og:site_name" content="See you space cowboy">
+<meta property="og:description" content="“Coming up with features is difficult, time.consuming, requires expert knowledge. “Appliedmachine learning” is basically featureengineering.”–Andrew Ng  数值特征(Numerical Features) 可以更容易的输入到算法中 可由floats">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-09-20T06:47:01.950Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="特征工程-2">
+<meta name="twitter:description" content="“Coming up with features is difficult, time.consuming, requires expert knowledge. “Appliedmachine learning” is basically featureengineering.”–Andrew Ng  数值特征(Numerical Features) 可以更容易的输入到算法中 可由floats">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://remkaze.github.io/2019/09/20/特征工程-2/">
+
+
+
+
+
+  <title>特征工程-2 | See you space cowboy</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">See you space cowboy</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://remkaze.github.io/2019/09/20/特征工程-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Rem.Kaze">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="http://wx1.sinaimg.cn/mw690/0072UwX1ly1g6vnuj66hyj30tz0u3dji.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="See you space cowboy">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">特征工程-2</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-20T14:46:12+08:00">
+                2019-09-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>“Coming up with features is difficult, time.consuming, requires expert knowledge. “Applied<br>machine learning” is basically feature<br>engineering.”<br><br>–Andrew Ng</p>
+</blockquote>
+<h2 id="数值特征-Numerical-Features"><a href="#数值特征-Numerical-Features" class="headerlink" title="数值特征(Numerical Features)"></a>数值特征(Numerical Features)</h2><ul>
+<li>可以更容易的输入到算法中</li>
+<li>可由floats, counts, numbers组成</li>
+<li>易补全缺失值</li>
+</ul>
+<h3 id="四舍五入-Rounding"><a href="#四舍五入-Rounding" class="headerlink" title="四舍五入(Rounding)"></a>四舍五入(Rounding)</h3><ul>
+<li>对数字特征进行四舍五入</li>
+<li>有损压缩：保留数据最显著的特征</li>
+<li>有时过分精确的效果等同于噪声</li>
+<li>被舍入的变量可视为分类变量</li>
+<li>舍入前进行对数变换<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">age age1 age2</span><br><span class="line">------- ---- ----</span><br><span class="line">23.6671 23 2</span><br><span class="line">23.8891 23 2</span><br><span class="line">22.1261 =&gt; 22 2</span><br><span class="line">19.5506 19 1</span><br><span class="line">18.2114 18 1</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="装箱-Binning"><a href="#装箱-Binning" class="headerlink" title="装箱(Binning)"></a>装箱(Binning)</h3><ul>
+<li>将数字特征装箱并用bin-ID编码</li>
+<li>可以采用分位点，平滑或者模型来找到最好的分箱</li>
+<li>可以优雅的处理在训练集中不存在的变量<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">risk_score rs[-inf,33] rs[33,66] rs[66,inf]</span><br><span class="line">---------- ----------- --------- ----------</span><br><span class="line"> 15 1 0 0</span><br><span class="line"> 77 0 0 1</span><br><span class="line"> 78 =&gt; 0 0 1</span><br><span class="line"> 55 0 1 0 </span><br><span class="line"> 42 0 1 0</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="缩放-Scaling"><a href="#缩放-Scaling" class="headerlink" title="缩放(Scaling)"></a>缩放(Scaling)</h3><ul>
+<li>将数字特征缩放到一个确定范围内</li>
+<li>标准化缩放(Standard (Z) Scaling)</li>
+<li>最小值最大值缩放(MinMax Scaling)</li>
+<li>根缩放(Root scaling)</li>
+<li>对数缩放(Log scaling)</li>
+</ul>
+<h3 id="填补-Imputation"><a href="#填补-Imputation" class="headerlink" title="填补(Imputation)"></a>填补(Imputation)</h3><ul>
+<li>填补缺失值</li>
+<li>用硬编码与填补组合</li>
+<li>求平均：很基础</li>
+<li>中位数: 对离群点更稳健</li>
+<li>忽略: 只是推迟问题</li>
+<li>使用模型：可能暴露算法偏差</li>
+</ul>
+<h3 id="交互-Interactions"><a href="#交互-Interactions" class="headerlink" title="交互(Interactions)"></a>交互(Interactions)</h3><ul>
+<li>将数字间交互的部分编码</li>
+<li>尝试加减乘除</li>
+<li>通过统计检验进行特征选择，或通过训练集对特征重要性排序</li>
+<li>人类的直觉,奇怪的组合也能做出重大改进</li>
+</ul>
+<hr>
+<blockquote>
+<p>…some machine learning projects succeed and<br>some fail. What makes the difference? Easily the<br>most important factor is the features used.<br><br>–Pedro Domingos</p>
+</blockquote>
+<h2 id="线性算法的非线性编码-Non-linear-encoding-for-linear-algo’s"><a href="#线性算法的非线性编码-Non-linear-encoding-for-linear-algo’s" class="headerlink" title="线性算法的非线性编码(Non-linear encoding for linear algo’s)"></a>线性算法的非线性编码(Non-linear encoding for linear algo’s)</h2><ul>
+<li>用非线性硬编码来改进线性算法</li>
+<li>多项式内核</li>
+<li>叶编码（嵌入随机森林）</li>
+<li>遗传算法</li>
+<li>局部线性嵌入，谱嵌入，t-SNE</li>
+</ul>
+<h2 id="行统计-Row-statistics"><a href="#行统计-Row-statistics" class="headerlink" title="行统计(Row statistics)"></a>行统计(Row statistics)</h2><ul>
+<li>创建行统计数据</li>
+<li>缺失值的数量</li>
+<li>0的数量</li>
+<li>负值的数量</li>
+<li>平均，最大值，最小，偏度，等等</li>
+<li></li>
+</ul>
+<hr>
+<blockquote>
+<p>The algorithms we used are very standard for<br>Kagglers. […] We spent most of our efforts in<br>feature engineering. […] We were also very<br>careful to discard features likely to expose us to<br>the risk of over-fitting our model.<br><br>-Xavier Conort</p>
+</blockquote>
+<hr>
+<h2 id="时间变量-Temporal-Variables"><a href="#时间变量-Temporal-Variables" class="headerlink" title="时间变量(Temporal Variables)"></a>时间变量(Temporal Variables)</h2><ul>
+<li>像是日期这类时间变量要做验证(像是回溯验证)</li>
+<li>容易翻车</li>
+<li>有重大改进机会</li>
+</ul>
+<h3 id="向圆内做投影-Projecting-to-a-circle"><a href="#向圆内做投影-Projecting-to-a-circle" class="headerlink" title="向圆内做投影(Projecting to a circle)"></a>向圆内做投影(Projecting to a circle)</h3><ul>
+<li>将单个的特征，比如 day_of_week,投影到一个圆的两个坐标上</li>
+<li>确保 max 和 min 间的距离等于 min 和 min+1 间的距离</li>
+<li>使用day_of_week, day_of_month, hour_of_day等等特征</li>
+</ul>
+<h3 id="趋势线-Trendlines"><a href="#趋势线-Trendlines" class="headerlink" title="趋势线(Trendlines)"></a>趋势线(Trendlines)</h3><ul>
+<li>用Spend in last week, spend in last month, spend in last year的编码代替total spend的编码</li>
+<li>给算法一个趋势：两个客户同样的花费，会有完全不同的行为:一个客户可能开始花更多的钱，另一个则开始减少支出。</li>
+</ul>
+<h3 id="贴近时事-Closeness-to-major-events"><a href="#贴近时事-Closeness-to-major-events" class="headerlink" title="贴近时事(Closeness to major events)"></a>贴近时事(Closeness to major events)</h3><ul>
+<li>创造新的特征编码，比如: 假期前的一天:1</li>
+<li>尝试国家节日，运动赛程，周末等特殊日子</li>
+<li>这些特征会对消费产生重大影响</li>
+</ul>
+<hr>
+<blockquote>
+<p>feature engineering is another topic which<br>doesn’t seem to merit any review papers or<br>books, or even chapters in books, but it is<br>absolutely vital to ML success. […] Much of the<br>success of machine learning is actually success<br>in engineering features that a learner can<br>understand.<br><br>-Scott Locklin</p>
+</blockquote>
+<hr>
+<h2 id="空间变量-Spatial-Variables"><a href="#空间变量-Spatial-Variables" class="headerlink" title="空间变量(Spatial Variables)"></a>空间变量(Spatial Variables)</h2><ul>
+<li>空间变量是编码空间位置的变量</li>
+<li>例如:GPS，城市，国家，地址</li>
+</ul>
+<h3 id="位置归类-Categorizing-location"><a href="#位置归类-Categorizing-location" class="headerlink" title="位置归类(Categorizing location)"></a>位置归类(Categorizing location)</h3><ul>
+<li>克里金插值(Kriging)</li>
+<li>K-means 分类</li>
+<li>原经纬度</li>
+<li>将城市转换为经纬度</li>
+<li>给街名添加邮政编码</li>
+</ul>
+<h3 id="与中心的接近程度-Closeness-to-hubs"><a href="#与中心的接近程度-Closeness-to-hubs" class="headerlink" title="与中心的接近程度(Closeness to hubs)"></a>与中心的接近程度(Closeness to hubs)</h3><ul>
+<li>找到某个位置和主要枢纽间的距离</li>
+<li>小城镇继承了附近大城市的一些文化/背景</li>
+<li>手机的位置可映射到最近的商业中心或超市</li>
+</ul>
+<h3 id="空间欺骗行为-Spatial-fraudulent-behavior"><a href="#空间欺骗行为-Spatial-fraudulent-behavior" class="headerlink" title="空间欺骗行为(Spatial fraudulent behavior)"></a>空间欺骗行为(Spatial fraudulent behavior)</h3><ul>
+<li>本地事件的数据可以作为可疑行为的暗示</li>
+<li>不可能的旅行速度：在多个国家同时出现交易</li>
+<li>在不同城镇的消费多过在家或送货地址</li>
+<li>从不在同一地点消费</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/特征工程/" rel="tag"># 特征工程</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/09/13/FeatureEngineering_encoding/" rel="next" title="特征工程 编码篇">
+                <i class="fa fa-chevron-left"></i> 特征工程 编码篇
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="http://wx1.sinaimg.cn/mw690/0072UwX1ly1g6vnuj66hyj30tz0u3dji.jpg" alt="Rem.Kaze">
+            
+              <p class="site-author-name" itemprop="name">Rem.Kaze</p>
+              <p class="site-description motion-element" itemprop="description">摸得透彻</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数值特征-Numerical-Features"><span class="nav-number">1.</span> <span class="nav-text">数值特征(Numerical Features)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#四舍五入-Rounding"><span class="nav-number">1.1.</span> <span class="nav-text">四舍五入(Rounding)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#装箱-Binning"><span class="nav-number">1.2.</span> <span class="nav-text">装箱(Binning)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缩放-Scaling"><span class="nav-number">1.3.</span> <span class="nav-text">缩放(Scaling)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#填补-Imputation"><span class="nav-number">1.4.</span> <span class="nav-text">填补(Imputation)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#交互-Interactions"><span class="nav-number">1.5.</span> <span class="nav-text">交互(Interactions)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#线性算法的非线性编码-Non-linear-encoding-for-linear-algo’s"><span class="nav-number">2.</span> <span class="nav-text">线性算法的非线性编码(Non-linear encoding for linear algo’s)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#行统计-Row-statistics"><span class="nav-number">3.</span> <span class="nav-text">行统计(Row statistics)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#时间变量-Temporal-Variables"><span class="nav-number">4.</span> <span class="nav-text">时间变量(Temporal Variables)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#向圆内做投影-Projecting-to-a-circle"><span class="nav-number">4.1.</span> <span class="nav-text">向圆内做投影(Projecting to a circle)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#趋势线-Trendlines"><span class="nav-number">4.2.</span> <span class="nav-text">趋势线(Trendlines)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#贴近时事-Closeness-to-major-events"><span class="nav-number">4.3.</span> <span class="nav-text">贴近时事(Closeness to major events)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#空间变量-Spatial-Variables"><span class="nav-number">5.</span> <span class="nav-text">空间变量(Spatial Variables)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#位置归类-Categorizing-location"><span class="nav-number">5.1.</span> <span class="nav-text">位置归类(Categorizing location)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#与中心的接近程度-Closeness-to-hubs"><span class="nav-number">5.2.</span> <span class="nav-text">与中心的接近程度(Closeness to hubs)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#空间欺骗行为-Spatial-fraudulent-behavior"><span class="nav-number">5.3.</span> <span class="nav-text">空间欺骗行为(Spatial fraudulent behavior)</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Rem.Kaze</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
